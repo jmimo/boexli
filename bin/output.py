@@ -54,23 +54,22 @@ def cleanup_gpio():
     GPIO.cleanup()
 
 
-def main():
+def main(config):
     prepare_gpio()
     app = Flask(__name__)
 
     api = Api(app)
-    #api.add_resource(Led, '/led/<string:state>')
     api.add_resource(Led, '/led/<string:state>')
 
-    app.run(host='0.0.0.0', port=80, debug=True)
+    app.run(host=config.get('server', 'host'), port=config.getint('server', 'port'), debug=config.getboolean('server', 'debug'))
 
 
 def shutdown_hook(signum, frame):
-    print("cleanup for shutdown")
+    print "cleanup for shutdown"
     cleanup_gpio()
 
 if __name__ == '__main__':
     register_shutdown_hook(shutdown_hook)
-    main()
+    main(load_configuration())
 
 

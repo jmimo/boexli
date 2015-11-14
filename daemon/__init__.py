@@ -1,7 +1,7 @@
 from datetime import datetime
 from sys import exit
 from signal import signal, SIGTERM
-from importlib import machinery
+import ConfigParser
 from os.path import isfile
 import argparse
 
@@ -15,7 +15,7 @@ def shutdown_handler(signum, frame):
     '''
     will exit the application.
     '''
-    print("[" + get_now() + "] received signal {}, exiting...".format(_signo))
+    print "[" + get_now() + "] received signal {}, exiting...".format(_signo)
     exit(0)
 
 
@@ -38,4 +38,7 @@ def load_configuration():
     arguments = parse_input()
     if not isfile(arguments.configuration):
         raise FileNotFoundError
-    return machinery.SourceFileLoader('configuration', arguments.configuration).load_module()
+    config = ConfigParser.RawConfigParser()
+    config.read(arguments.configuration)
+    return config
+
