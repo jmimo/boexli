@@ -7,24 +7,23 @@ import RPi.GPIO as GPIO
 
 class Led(Resource):
 
-    def get(self, state, color):
-        if state == 'on':
-            if color == 'red':
-                red()
-            elif color == 'green':
-                green()
-            elif color == 'orange':
-                orange()
-            else:
-                abort(400, message='unknown color: {}'.format(color))
+    def get(self, state):
+        if state == 'red':
+            red()
+        elif state == 'green':
+            green()
+        elif state == 'orange':
+            orange()
         elif state == 'off':
             off()
         else:
-            abort(400, message='unknown state: {}'.format(state))
+            off()
+            abort(400, message='unknown color: {}'.format(color))
 
 
 
 def prepare_gpio():
+    GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(7, GPIO.OUT)
     GPIO.setup(11, GPIO.OUT)
@@ -60,10 +59,10 @@ def main():
     app = Flask(__name__)
 
     api = Api(app)
+    #api.add_resource(Led, '/led/<string:state>')
     api.add_resource(Led, '/led/<string:state>')
-    api.add_resource(Led, '/led/<string:state>/<string:color>')
 
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=80, debug=True)
 
 
 def shutdown_hook(signum, frame):
@@ -72,6 +71,6 @@ def shutdown_hook(signum, frame):
 
 if __name__ == '__main__':
     register_shutdown_hook(shutdown_hook)
-    main(load_configuration())
+    main()
 
 
