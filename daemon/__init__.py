@@ -30,7 +30,7 @@ def register_shutdown_hook(shutdown_hook):
 
 def parse_input():
     parser = argparse.ArgumentParser(description='Generic service arguments')
-    parser.add_argument('configuration', required=True, type=str, help='path to python style configuration file.')
+    parser.add_argument('configuration', type=str, help='path to python style configuration file.')
     return parser.parse_args()
 
 
