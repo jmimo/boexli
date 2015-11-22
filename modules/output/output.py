@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 from daemon import register_shutdown_hook, load_configuration
 from flask import Flask, request
 from flask_restful import Resource, Api, abort

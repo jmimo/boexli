@@ -1,22 +1,22 @@
 #!/bin/sh
 #
-# init script for ship-it
+# init script for output service
 #
 
 ### BEGIN INIT INFO
-# Provides:          ship-it
-# Required-Start:    $remote_fs $syslog $network
-# Required-Stop:     $remote_fs $syslog $network
+# Provides:          watchdog service
+# Required-Start:    $syslog
+# Required-Stop:     $syslog
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: init script for the ship-it box
-# Description:       We'll have to fill this out later...
+# Short-Description: init script for the watchdog service
+# Description:       service to observe all system relevant sensors and services.
 ### END INIT INFO
 
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-NAME=ship-it
-DAEMON=/home/pi/ship-it/main.py
-DAEMONARGS=""
+NAME=output
+DAEMON=/home/mimo/development/workspace/boexli/watchdog/watchdog.py
+DAEMONARGS="/home/mimo/development/workspace/boexli/watchdog/watchdog.conf"
 PIDFILE=/var/run/$NAME.pid
 LOGFILE=/var/log/$NAME.log
 

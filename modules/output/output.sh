@@ -15,8 +15,8 @@
 
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 NAME=output
-DAEMON=/home/mimo/development/workspace/boexli/bin/output.sh
-DAEMONARGS="/home/mimo/development/workspace/boexli/bin/output.conf"
+DAEMON=/home/mimo/development/workspace/boexli/output/output.py
+DAEMONARGS="/home/mimo/development/workspace/boexli/output/output.conf"
 PIDFILE=/var/run/$NAME.pid
 LOGFILE=/var/log/$NAME.log
 
